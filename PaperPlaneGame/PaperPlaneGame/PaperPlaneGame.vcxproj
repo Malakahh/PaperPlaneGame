@@ -74,9 +74,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PaperPlane.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -86,8 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="PaperPlane.h" />
     <ClInclude Include="Settings.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="WorldObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

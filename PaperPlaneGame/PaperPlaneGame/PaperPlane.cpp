@@ -1,15 +1,10 @@
 #include "PaperPlane.h"
-
+#include "TextureManager.h"
 
 
 Game::PaperPlane::PaperPlane() : WorldObject()
 {
-	if (!planeTex.loadFromFile("..\\Assets\\PaperPlane.png"))
-	{
-		//Error
-	}
-
-	this->sprite.setTexture(planeTex);
+	this->sprite.setTexture(TextureManager::GetTexture("PaperPlane.png"));
 	this->sprite.setPosition(10, 40);
 }
 

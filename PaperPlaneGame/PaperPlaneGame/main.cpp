@@ -2,6 +2,7 @@
 #include "Settings.h"
 #include "Camera.h"
 #include "PaperPlane.h"
+#include "Log.h"
 
 void initSettings()
 {
