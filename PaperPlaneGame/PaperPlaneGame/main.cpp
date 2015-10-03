@@ -1,20 +1,21 @@
 #include <SFML/Graphics.hpp>
+#include "Settings.h"
+#include "Camera.h"
+#include "PaperPlane.h"
+
+void initSettings()
+{
+	Settings::ScreenResolutionX = 1280;
+	Settings::ScreenResolutionY = 720;
+}
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	initSettings();
+	sf::RenderWindow window(sf::VideoMode(Settings::ScreenResolutionX, Settings::ScreenResolutionY), "SFML works!");
+	Game::Camera camera = Game::Camera(window, 16, 9);
 
-	sf::Texture planeTex;
-	if (!planeTex.loadFromFile("..\\Assets\\PaperPlane.png"))
-	{
-		//Error
-	}
-
-	sf::Sprite sprite;
-	sprite.setTexture(planeTex);
-	sprite.setPosition(sf::Vector2f(10, 50)); // absolute position
+	Game::PaperPlane plane;
 
 	while (window.isOpen())
 	{
@@ -27,9 +28,9 @@ int main()
 		}
 
 		window.clear();
-		window.draw(sprite);
+		camera.drawSprites();
 		window.display();
 	}
-
+	
 	return 0;
 }
