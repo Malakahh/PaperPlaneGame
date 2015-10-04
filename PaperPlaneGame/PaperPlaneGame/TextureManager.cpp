@@ -2,7 +2,7 @@
 
 std::unordered_map<std::string, sf::Texture*> loadedTextures;
 
-sf::Texture& TextureManager::GetTexture(const std::string textureName)
+sf::Texture& TextureManager::getTexture(const std::string textureName)
 {
 	if (loadedTextures.count(textureName) == 0) //texture not previously loaded
 	{

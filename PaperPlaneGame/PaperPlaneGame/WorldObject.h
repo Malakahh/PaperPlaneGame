@@ -1,9 +1,12 @@
 #pragma once
 #include <SFML\System\Vector3.hpp>
 #include <SFML\Graphics.hpp>
+#include "Log.h"
 #include <vector>
 #include <memory>
 
+#define LAYER_WORLD 0
+#define LAYER_UI 1
 
 namespace Game
 {
@@ -13,10 +16,22 @@ namespace Game
 	class WorldObject
 	{
 	public:
-
+		//World position in units
 		sf::Vector3f position = sf::Vector3f(0,0,0);
+
+		//Size in units
 		sf::Vector2f size = sf::Vector2f(1, 1);
+
+		//Layer in which to draw this WorldObject
+		int layer = LAYER_WORLD;
+
+		//Sprite
 		sf::Sprite sprite;
+
+		//Determines whether or not the object needs to be scaled
+		bool isScaled = false;
+
+		bool shouldDraw = true;
 
 		WorldObject();
 		~WorldObject();

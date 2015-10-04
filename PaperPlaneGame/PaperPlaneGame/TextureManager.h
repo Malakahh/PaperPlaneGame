@@ -6,5 +6,5 @@
 
 namespace TextureManager
 {
-	sf::Texture& GetTexture(const std::string textureName);
+	sf::Texture& getTexture(const std::string textureName);
 }
