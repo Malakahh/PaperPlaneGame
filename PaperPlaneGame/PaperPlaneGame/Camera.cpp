@@ -8,6 +8,7 @@ Game::Camera::Camera(sf::RenderWindow & w, int vWidth, int vHeight) : window(w)
 
 Game::Camera::~Camera()
 {
+	this->name = "Camera";
 }
 
 void Game::Camera::drawSprites()
@@ -15,22 +16,32 @@ void Game::Camera::drawSprites()
 	//Build worldobjects to draw
 	for (auto it = Game::AllWorldObjects.begin(); it != Game::AllWorldObjects.end(); ++it)
 	{
-		Game::WorldObject obj = *(*it);
-		if (this->shouldDrawWorldObject(obj))
+		Game::WorldObject* obj = *it;
+		if (this->shouldDrawWorldObject(*obj))
 		{
-			this->scaleWorldObjectToUnit(obj);
-			this->worldObjectsToDraw[obj.layer][obj.position.z].push_back(obj);
+			this->scaleWorldObjectToUnit(*obj);
+			this->worldObjectsToDraw[obj->layer][obj->position.z].push_back(obj);
 		}
 	}
 	
 	//Draw objects in correct order
-	for (auto layerIt = this->worldObjectsToDraw.cbegin(); layerIt != this->worldObjectsToDraw.cend(); ++layerIt) //Layers
+	for (auto layerIt = this->worldObjectsToDraw.begin(); layerIt != this->worldObjectsToDraw.end(); ++layerIt) //Layers
 	{
-		for (auto zLevelIt = layerIt->second.cbegin(); zLevelIt != layerIt->second.cend(); ++zLevelIt) //Z-levels
+		for (auto zLevelIt = layerIt->second.begin(); zLevelIt != layerIt->second.end(); ++zLevelIt) //Z-levels
 		{
-			for (auto worldObjectIt = zLevelIt->second.cbegin(); worldObjectIt != zLevelIt->second.cend(); ++worldObjectIt) //All WorldObjects at this z-level
+			for (auto worldObjectIt = zLevelIt->second.begin(); worldObjectIt != zLevelIt->second.end(); ++worldObjectIt) //All WorldObjects at this z-level
 			{
-				this->window.draw(worldObjectIt->sprite);
+				Game::WorldObject* obj = *worldObjectIt;
+
+				if (obj->sprite != nullptr)
+				{
+					this->window.draw(*obj->sprite);
+				}
+	
+				if (obj->text != nullptr)
+				{
+					this->window.draw(*obj->text);
+				}
 			}
 		}
 	}
@@ -40,14 +51,14 @@ void Game::Camera::drawSprites()
 
 void Game::Camera::scaleWorldObjectToUnit(Game::WorldObject & object)
 {
-	if (!object.isScaled)
+	if (!object.isScaled && object.sprite != nullptr)
 	{
 		sf::Vector2u moop;
-		sf::Vector2u spriteSize = object.sprite.getTexture()->getSize();
+		sf::Vector2u spriteSize = object.sprite->getTexture()->getSize();
 		sf::Vector2f spriteScale = sf::Vector2f(
 			(this->pixelsPerUnitX * object.size.x) / spriteSize.x,
 			(this->pixelsPerUnitY * object.size.y) / spriteSize.y);
-		object.sprite.setScale(spriteScale);
+		object.sprite->setScale(spriteScale);
 		object.isScaled = true;
 	}
 }

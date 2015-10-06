@@ -26,15 +26,24 @@ namespace Game
 		int layer = LAYER_WORLD;
 
 		//Sprite
-		sf::Sprite sprite;
+		sf::Sprite *sprite;
+
+		//Text
+		sf::Font *font;
+		sf::Text *text;
 
 		//Determines whether or not the object needs to be scaled
 		bool isScaled = false;
 
 		bool shouldDraw = true;
 
+		std::string name = "WorldObject";
+
 		WorldObject();
 		~WorldObject();
+
+		//Called every frame, deltaTime is in ms
+		virtual void Update(int deltaTime);
 	};
 
 	extern std::vector<Game::WorldObject*> AllWorldObjects;

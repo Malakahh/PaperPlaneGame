@@ -10,4 +10,26 @@ Game::WorldObject::WorldObject()
 
 Game::WorldObject::~WorldObject()
 {
+	Log::Error(this->name + " destructor called");
+	
+	if (sprite != nullptr)
+	{
+		delete sprite;
+	}
+
+	if (font != nullptr)
+	{
+		delete font;
+	}
+
+	if (text != nullptr)
+	{
+		delete text;
+	}
+	
+}
+
+void Game::WorldObject::Update(int deltaTime)
+{
+
 }

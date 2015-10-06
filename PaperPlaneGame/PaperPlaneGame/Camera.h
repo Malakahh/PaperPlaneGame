@@ -7,7 +7,7 @@
 #include <vector>
 #include <unordered_map>
 
-#define Z_LEVEL std::unordered_map<float, std::vector<Game::WorldObject>>
+#define Z_LEVEL std::unordered_map<float, std::vector<Game::WorldObject*>>
 
 namespace Game
 {

@@ -3,6 +3,8 @@
 #include "Camera.h"
 #include "PaperPlane.h"
 #include "Log.h"
+#include "WorldObject.h"
+#include "FPS.h"
 
 void initSettings()
 {
@@ -17,6 +19,10 @@ int main()
 	Game::Camera camera = Game::Camera(window, 16, 9);
 
 	Game::PaperPlane plane;
+	Game::FPS fps;
+
+	sf::Clock clock;
+	sf::Time lastFrameTime = clock.getElapsedTime();
 
 	while (window.isOpen())
 	{
@@ -27,6 +33,14 @@ int main()
 				window.close();
 				
 		}
+
+		//Call update
+		sf::Time time = clock.getElapsedTime();
+		for (auto it = Game::AllWorldObjects.cbegin(); it != Game::AllWorldObjects.cend(); ++it)
+		{
+			(*it)->Update(time.asMilliseconds() - lastFrameTime.asMilliseconds());
+		}
+		lastFrameTime = time;
 
 		window.clear();
 		camera.drawSprites();
