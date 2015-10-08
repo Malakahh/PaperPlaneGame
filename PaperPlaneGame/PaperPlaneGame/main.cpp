@@ -19,7 +19,7 @@ int main()
 	Game::Camera camera = Game::Camera(window, 16, 9);
 
 	Game::PaperPlane plane;
-	Game::FPS fps;
+	Game::FPS fps = Game::FPS(camera);
 
 	sf::Clock clock;
 	sf::Time lastFrameTime = clock.getElapsedTime();

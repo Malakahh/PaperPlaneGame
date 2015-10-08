@@ -9,9 +9,7 @@ Game::WorldObject::WorldObject()
 
 
 Game::WorldObject::~WorldObject()
-{
-	Log::Error(this->name + " destructor called");
-	
+{	
 	if (sprite != nullptr)
 	{
 		delete sprite;

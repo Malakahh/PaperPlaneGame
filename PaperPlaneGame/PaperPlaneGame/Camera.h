@@ -6,14 +6,17 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <memory>
 
 #define Z_LEVEL std::unordered_map<float, std::vector<Game::WorldObject*>>
 
 namespace Game
 {
-	class Camera : Game::WorldObject
+	class Camera : public Game::WorldObject
 	{
 	public:
+		static Game::Camera Singleton;
+
 		Camera(sf::RenderWindow &w, int vWidth, int vHeight);
 		~Camera();
 
@@ -43,6 +46,8 @@ namespace Game
 		//Scales a worldobject to its proper pixel size based on world size
 		void scaleWorldObjectToUnit(Game::WorldObject& object);
 
+		//Positions a sprite properly accoring to the viewport
+		void positionWorldObject(Game::WorldObject& object);
 	};
 }
 

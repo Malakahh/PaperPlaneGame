@@ -1,35 +1,39 @@
 #include "Camera.h"
 
+#define CAMERA_HALF_WIDTH static_cast<float>(this->getViewportWidth()) / 2
+#define CAMERA_HALF_HEIGHT static_cast<float>(this->getViewportHeight()) / 2
+
 Game::Camera::Camera(sf::RenderWindow & w, int vWidth, int vHeight) : window(w)
 {
 	this->setViewportSize(vWidth, vHeight);
 	this->shouldDraw = false;
+	this->name = "Camera";
 }
 
 Game::Camera::~Camera()
 {
-	this->name = "Camera";
 }
 
 void Game::Camera::drawSprites()
 {
 	//Build worldobjects to draw
-	for (auto it = Game::AllWorldObjects.begin(); it != Game::AllWorldObjects.end(); ++it)
+	for (auto it = Game::AllWorldObjects.cbegin(); it != Game::AllWorldObjects.cend(); ++it)
 	{
 		Game::WorldObject* obj = *it;
 		if (this->shouldDrawWorldObject(*obj))
 		{
 			this->scaleWorldObjectToUnit(*obj);
+			this->positionWorldObject(*obj);
 			this->worldObjectsToDraw[obj->layer][obj->position.z].push_back(obj);
 		}
 	}
 	
 	//Draw objects in correct order
-	for (auto layerIt = this->worldObjectsToDraw.begin(); layerIt != this->worldObjectsToDraw.end(); ++layerIt) //Layers
+	for (auto layerIt = this->worldObjectsToDraw.cbegin(); layerIt != this->worldObjectsToDraw.cend(); ++layerIt) //Layers
 	{
-		for (auto zLevelIt = layerIt->second.begin(); zLevelIt != layerIt->second.end(); ++zLevelIt) //Z-levels
+		for (auto zLevelIt = layerIt->second.cbegin(); zLevelIt != layerIt->second.cend(); ++zLevelIt) //Z-levels
 		{
-			for (auto worldObjectIt = zLevelIt->second.begin(); worldObjectIt != zLevelIt->second.end(); ++worldObjectIt) //All WorldObjects at this z-level
+			for (auto worldObjectIt = zLevelIt->second.cbegin(); worldObjectIt != zLevelIt->second.cend(); ++worldObjectIt) //All WorldObjects at this z-level
 			{
 				Game::WorldObject* obj = *worldObjectIt;
 
@@ -63,22 +67,35 @@ void Game::Camera::scaleWorldObjectToUnit(Game::WorldObject & object)
 	}
 }
 
+void Game::Camera::positionWorldObject(Game::WorldObject & object)
+{
+	float x = (this->position.x + object.position.x - object.size.x / 2 + CAMERA_HALF_WIDTH) * pixelsPerUnitX;
+	float y = (this->position.y + object.position.y - object.size.y / 2 + CAMERA_HALF_HEIGHT) * pixelsPerUnitY;
+
+	if (object.sprite != nullptr)
+	{
+		object.sprite->setPosition(sf::Vector2f(x,y));
+	}
+
+	if (object.text != nullptr)
+	{
+		object.text->setPosition(sf::Vector2f(x, y));
+	}
+}
+
 bool Game::Camera::shouldDrawWorldObject(WorldObject & object)
 {
 	if (object.shouldDraw)
 	{
-		float cameraHalfWidth = static_cast<float>(this->getViewportWidth()) / 2;
-		float cameraHalfHeight = static_cast<float>(this->getViewportHeight()) / 2;
-
 		float objectPosition_Right = object.position.x + object.size.x / 2;
 		float objectPosition_Left = object.position.x - object.size.x / 2;
 		float objectPosition_Up = object.position.y + object.size.y / 2;
 		float objectPosition_Down = object.position.y - object.size.y / 2;
 
-		if (this->position.x - cameraHalfWidth < objectPosition_Right && //Right side of worldobject is within the left side of camera
-			this->position.x + cameraHalfWidth > objectPosition_Left && //Left side of worldobject is within the right side of camera
-			this->position.y + cameraHalfHeight > objectPosition_Down && //Lower side of worldobject is within the top side of camera
-			this->position.y - cameraHalfHeight < objectPosition_Up) //Upper side of worldobject is within the bottom side of camera
+		if (this->position.x - CAMERA_HALF_WIDTH < objectPosition_Right && //Right side of worldobject is within the left side of camera
+			this->position.x + CAMERA_HALF_WIDTH > objectPosition_Left && //Left side of worldobject is within the right side of camera
+			this->position.y + CAMERA_HALF_HEIGHT > objectPosition_Down && //Lower side of worldobject is within the top side of camera
+			this->position.y - CAMERA_HALF_HEIGHT < objectPosition_Up) //Upper side of worldobject is within the bottom side of camera
 		{
 			return true;
 		}

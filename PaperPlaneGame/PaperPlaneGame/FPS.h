@@ -1,13 +1,14 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "WorldObject.h"
+#include "Camera.h"
 
 namespace Game
 {
 	class FPS : public Game::WorldObject
 	{
 	public:
-		FPS();
+		FPS(Game::Camera& camera);
 		~FPS();
 
 		void Update(int deltaTime) override;
