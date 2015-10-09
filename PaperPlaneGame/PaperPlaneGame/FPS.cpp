@@ -22,7 +22,7 @@ Game::FPS::FPS(Game::Camera& camera)
 
 	this->position = sf::Vector3f(
 		camera.position.x - camera.getViewportWidth() / 2 + this->size.x / 2,
-		camera.position.y - camera.getViewportHeight() / 2,
+		camera.position.y + camera.getViewportHeight() / 2 - this->size.y / 2,
 		0);
 }
 

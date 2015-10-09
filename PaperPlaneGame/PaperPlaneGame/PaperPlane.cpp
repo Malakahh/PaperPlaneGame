@@ -23,12 +23,10 @@ void Game::PaperPlane::Update(int deltaTime)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		Log::Message("Left: " + std::to_string(this->position.x) + " - " + std::to_string(dt));
 		this->position += sf::Vector3f(-10 * dt, 0, 0);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-
 		this->position += sf::Vector3f(10 * dt, 0, 0);
 	}
 	

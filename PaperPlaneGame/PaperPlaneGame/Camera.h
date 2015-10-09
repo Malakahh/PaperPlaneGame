@@ -21,9 +21,9 @@ namespace Game
 		~Camera();
 
 		void drawSprites();
-		int getViewportWidth() const;
-		int getViewportHeight() const;
-		void setViewportSize(int vWidth, int vHeight);
+		float getViewportWidth() const;
+		float getViewportHeight() const;
+		void setViewportSize(float vWidth, float vHeight);
 
 	private:
 		sf::RenderWindow &window;

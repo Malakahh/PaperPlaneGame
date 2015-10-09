@@ -1,7 +1,7 @@
 #include "Camera.h"
 
-#define CAMERA_HALF_WIDTH static_cast<float>(this->getViewportWidth()) / 2
-#define CAMERA_HALF_HEIGHT static_cast<float>(this->getViewportHeight()) / 2
+#define CAMERA_HALF_WIDTH this->getViewportWidth() / 2.0f
+#define CAMERA_HALF_HEIGHT this->getViewportHeight() / 2.0f
 
 Game::Camera::Camera(sf::RenderWindow & w, float vWidth, float vHeight) : window(w)
 {
@@ -70,11 +70,11 @@ void Game::Camera::scaleWorldObjectToUnit(Game::WorldObject & object)
 void Game::Camera::positionWorldObject(Game::WorldObject & object)
 {
 	float x = (this->position.x + object.position.x - object.size.x / 2 + CAMERA_HALF_WIDTH) * pixelsPerUnitX;
-	float y = Settings::ScreenResolutionY - (this->position.y + object.position.y - object.size.y / 2 + CAMERA_HALF_HEIGHT) * pixelsPerUnitY;
+	float y = (this->position.y - object.position.y - object.size.y / 2 + CAMERA_HALF_HEIGHT) * pixelsPerUnitY;
 
 	if (object.sprite != nullptr)
 	{
-		object.sprite->setPosition(sf::Vector2f(x,y));
+		object.sprite->setPosition(sf::Vector2f(x, y));
 	}
 
 	if (object.text != nullptr)
@@ -87,18 +87,23 @@ bool Game::Camera::shouldDrawWorldObject(WorldObject & object)
 {
 	if (object.shouldDraw)
 	{
-		float objectPosition_Right = object.position.x + object.size.x / 2;
-		float objectPosition_Left = object.position.x - object.size.x / 2;
-		float objectPosition_Up = object.position.y + object.size.y / 2;
-		float objectPosition_Down = object.position.y - object.size.y / 2;
+		float objectPosition_Right = object.position.x + object.size.x / 2.0f;
+		float objectPosition_Left = object.position.x - object.size.x / 2.0f;
+		float objectPosition_Up = object.position.y + object.size.y / 2.0f;
+		float objectPosition_Down = object.position.y - object.size.y / 2.0f;
 
 		if (this->position.x - CAMERA_HALF_WIDTH < objectPosition_Right && //Right side of worldobject is within the left side of camera
 			this->position.x + CAMERA_HALF_WIDTH > objectPosition_Left && //Left side of worldobject is within the right side of camera
-			this->position.y + CAMERA_HALF_HEIGHT > objectPosition_Down && //Lower side of worldobject is within the top side of camera
-			this->position.y - CAMERA_HALF_HEIGHT < objectPosition_Up) //Upper side of worldobject is within the bottom side of camera
+			this->position.y - CAMERA_HALF_HEIGHT < objectPosition_Up && //Upper side of worldobject is within the bottom side of camera
+			this->position.y + CAMERA_HALF_HEIGHT > objectPosition_Down) //Lower side of worldobject is within the top side of camera
 		{
 			return true;
 		}
+	}
+
+	if (object.name == "PaperPlane")
+	{
+		Log::Message("Shouldn't draw");
 	}
 
 	return false;
@@ -116,17 +121,17 @@ void Game::Camera::clearWorldObjectsToDraw()
 	}
 }
 
-int Game::Camera::getViewportWidth() const
+float Game::Camera::getViewportWidth() const
 {
 	return this->viewportWidth;
 }
 
-int Game::Camera::getViewportHeight() const
+float Game::Camera::getViewportHeight() const
 {
 	return this->viewportHeight;
 }
 
-void Game::Camera::setViewportSize(int vWidth, int vHeight)
+void Game::Camera::setViewportSize(float vWidth, float vHeight)
 {
 	this->viewportWidth = vWidth;
 	this->viewportHeight = vHeight;

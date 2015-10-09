@@ -16,7 +16,7 @@ int main()
 {
 	initSettings();
 	sf::RenderWindow window(sf::VideoMode(Settings::ScreenResolutionX, Settings::ScreenResolutionY), "SFML works!");
-	Game::Camera camera = Game::Camera(window, 19.2, 10.8);
+	Game::Camera camera = Game::Camera(window, 19.2f, 10.8f);
 
 	//Spawn stuff
 	Game::PaperPlane plane;
