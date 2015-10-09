@@ -8,16 +8,17 @@
 
 void initSettings()
 {
-	Settings::ScreenResolutionX = 1280;
-	Settings::ScreenResolutionY = 720;
+	Settings::ScreenResolutionX = 1600;
+	Settings::ScreenResolutionY = 900;
 }
 
 int main()
 {
 	initSettings();
 	sf::RenderWindow window(sf::VideoMode(Settings::ScreenResolutionX, Settings::ScreenResolutionY), "SFML works!");
-	Game::Camera camera = Game::Camera(window, 16, 9);
+	Game::Camera camera = Game::Camera(window, 19.2, 10.8);
 
+	//Spawn stuff
 	Game::PaperPlane plane;
 	Game::FPS fps = Game::FPS(camera);
 

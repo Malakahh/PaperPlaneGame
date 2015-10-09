@@ -3,7 +3,7 @@
 #define CAMERA_HALF_WIDTH static_cast<float>(this->getViewportWidth()) / 2
 #define CAMERA_HALF_HEIGHT static_cast<float>(this->getViewportHeight()) / 2
 
-Game::Camera::Camera(sf::RenderWindow & w, int vWidth, int vHeight) : window(w)
+Game::Camera::Camera(sf::RenderWindow & w, float vWidth, float vHeight) : window(w)
 {
 	this->setViewportSize(vWidth, vHeight);
 	this->shouldDraw = false;
@@ -70,7 +70,7 @@ void Game::Camera::scaleWorldObjectToUnit(Game::WorldObject & object)
 void Game::Camera::positionWorldObject(Game::WorldObject & object)
 {
 	float x = (this->position.x + object.position.x - object.size.x / 2 + CAMERA_HALF_WIDTH) * pixelsPerUnitX;
-	float y = (this->position.y + object.position.y - object.size.y / 2 + CAMERA_HALF_HEIGHT) * pixelsPerUnitY;
+	float y = Settings::ScreenResolutionY - (this->position.y + object.position.y - object.size.y / 2 + CAMERA_HALF_HEIGHT) * pixelsPerUnitY;
 
 	if (object.sprite != nullptr)
 	{

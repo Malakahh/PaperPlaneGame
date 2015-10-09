@@ -26,7 +26,6 @@ Game::FPS::FPS(Game::Camera& camera)
 		0);
 }
 
-
 Game::FPS::~FPS()
 {
 }

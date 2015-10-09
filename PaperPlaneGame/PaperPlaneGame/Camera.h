@@ -17,7 +17,7 @@ namespace Game
 	public:
 		static Game::Camera Singleton;
 
-		Camera(sf::RenderWindow &w, int vWidth, int vHeight);
+		Camera(sf::RenderWindow &w, float vWidth, float vHeight);
 		~Camera();
 
 		void drawSprites();
@@ -29,7 +29,7 @@ namespace Game
 		sf::RenderWindow &window;
 
 		//Viewport width and height in units.
-		int viewportWidth, viewportHeight;
+		float viewportWidth, viewportHeight;
 
 		//Allows the size of WorldObjects to be independant from resolution
 		float pixelsPerUnitX, pixelsPerUnitY;

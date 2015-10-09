@@ -8,6 +8,8 @@ namespace Game
 	public:
 		PaperPlane();
 		~PaperPlane();
+
+		void Update(int deltaTime) override;
 	};
 }
 
