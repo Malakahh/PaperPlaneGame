@@ -73,13 +73,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackgroundSegment.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ControlObject.cpp" />
     <ClCompile Include="FPS.cpp" />
+    <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PaperPlane.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="WallSegment.cpp" />
+    <ClCompile Include="WeightedRandomizer.cpp" />
     <ClCompile Include="WorldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -88,12 +93,17 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackgroundSegment.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="ControlObject.h" />
     <ClInclude Include="FPS.h" />
+    <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="PaperPlane.h" />
     <ClInclude Include="Settings.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="WallSegment.h" />
+    <ClInclude Include="WeightedRandomizer.h" />
     <ClInclude Include="WorldObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

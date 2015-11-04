@@ -5,10 +5,9 @@
 #include "Log.h"
 #include <iostream>
 #include <vector>
-#include <unordered_map>
 #include <memory>
 
-#define Z_LEVEL std::unordered_map<float, std::vector<Game::WorldObject*>>
+#define Z_LEVEL std::map<float, std::vector<Game::WorldObject*>>
 
 namespace Game
 {
@@ -25,6 +24,9 @@ namespace Game
 		float getViewportHeight() const;
 		void setViewportSize(float vWidth, float vHeight);
 
+		//Returns whether or not the world object is visible in the camera, wnad whether or not it should be drawn.
+		bool shouldDrawWorldObject(Game::WorldObject& object);
+
 	private:
 		sf::RenderWindow &window;
 
@@ -35,10 +37,8 @@ namespace Game
 		float pixelsPerUnitX, pixelsPerUnitY;
 
 		//Objects to draw this frame
-		std::unordered_map<int, Z_LEVEL> worldObjectsToDraw;
+		std::map<int, Z_LEVEL> worldObjectsToDraw;
 
-		//Returns whether or not the world object is visible in the camera, wnad whether or not it should be drawn.
-		bool shouldDrawWorldObject(Game::WorldObject& object);
 
 		//Clears worldObjectsToDraw
 		void clearWorldObjectsToDraw();

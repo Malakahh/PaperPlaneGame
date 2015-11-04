@@ -5,6 +5,7 @@
 #include "Log.h"
 #include "WorldObject.h"
 #include "FPS.h"
+#include "LevelGenerator.h"
 
 void initSettings()
 {
@@ -21,6 +22,7 @@ int main()
 	//Spawn stuff
 	Game::PaperPlane plane;
 	Game::FPS fps = Game::FPS(camera);
+	Game::LevelGenerator levelGen = Game::LevelGenerator(camera);
 
 	sf::Clock clock;
 	sf::Time lastFrameTime = clock.getElapsedTime();
@@ -35,12 +37,20 @@ int main()
 				
 		}
 
-		//Call update
 		sf::Time time = clock.getElapsedTime();
+
+		//Call WorldObject update
 		for (auto it = Game::AllWorldObjects.cbegin(); it != Game::AllWorldObjects.cend(); ++it)
 		{
 			(*it)->Update(time.asMilliseconds() - lastFrameTime.asMilliseconds());
 		}
+
+		//Call ControlObject update
+		for (auto it = Game::AllControlObjects.cbegin(); it != Game::AllControlObjects.cend(); ++it)
+		{
+			(*it)->Update(time.asMilliseconds() - lastFrameTime.asMilliseconds());
+		}
+
 		lastFrameTime = time;
 
 		window.clear();

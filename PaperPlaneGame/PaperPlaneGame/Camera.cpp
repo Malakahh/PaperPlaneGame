@@ -27,7 +27,7 @@ void Game::Camera::drawSprites()
 			this->worldObjectsToDraw[obj->layer][obj->position.z].push_back(obj);
 		}
 	}
-	
+
 	//Draw objects in correct order
 	for (auto layerIt = this->worldObjectsToDraw.cbegin(); layerIt != this->worldObjectsToDraw.cend(); ++layerIt) //Layers
 	{
@@ -99,11 +99,6 @@ bool Game::Camera::shouldDrawWorldObject(WorldObject & object)
 		{
 			return true;
 		}
-	}
-
-	if (object.name == "PaperPlane")
-	{
-		Log::Message("Shouldn't draw");
 	}
 
 	return false;
