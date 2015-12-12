@@ -76,6 +76,7 @@
     <ClCompile Include="BackgroundSegment.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ControlObject.cpp" />
+    <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="FPS.cpp" />
     <ClCompile Include="LevelGenerator.cpp" />
     <ClCompile Include="Log.cpp" />
@@ -96,6 +97,7 @@
     <ClInclude Include="BackgroundSegment.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ControlObject.h" />
+    <ClInclude Include="EventSystem.h" />
     <ClInclude Include="FPS.h" />
     <ClInclude Include="LevelGenerator.h" />
     <ClInclude Include="Log.h" />

@@ -1,6 +1,5 @@
+#pragma once
 #include "PaperPlane.h"
-#include "TextureManager.h"
-
 
 Game::PaperPlane::PaperPlane()
 {
@@ -9,9 +8,8 @@ Game::PaperPlane::PaperPlane()
 	this->position = sf::Vector3f(0, 3, 0);
 
 	this->size.x = 2;
-	this->name = "PaperPlane";
+	this->name = "PaperPlane";	
 }
-
 
 Game::PaperPlane::~PaperPlane()
 {

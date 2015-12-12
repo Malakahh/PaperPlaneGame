@@ -10,6 +10,8 @@ Game::WorldObject::WorldObject()
 
 Game::WorldObject::~WorldObject()
 {	
+	Game::AllWorldObjects.erase(std::remove(Game::AllWorldObjects.begin(), Game::AllWorldObjects.end(), this), Game::AllWorldObjects.end());
+
 	if (sprite != nullptr)
 	{
 		delete sprite;
@@ -24,7 +26,6 @@ Game::WorldObject::~WorldObject()
 	{
 		delete text;
 	}
-	
 }
 
 void Game::WorldObject::Update(int deltaTime)
