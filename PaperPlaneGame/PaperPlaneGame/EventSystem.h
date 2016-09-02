@@ -57,9 +57,8 @@ namespace EventSystem
 	//Gets the callbacks for a given event
 	//	T	:	Callback signature of event
 	//	eventID	:	ID of the event callbacks (see defines)
-	//	obj	:	Game::WorldObject (used for overloading of function)
 	//	@return	:	Collection of callbacks
-	template<typename T> std::vector<std::function<T>> GetEventCallbacks(short eventID, Game::WorldObject* obj)
+	template<typename T> std::vector<std::function<T>> GetEventCallbacksWO(short eventID)
 	{
 		std::vector<std::function<T>> vec;
 		auto eventMap = worldObjectCallbacks.find(eventID)->second;
@@ -77,9 +76,8 @@ namespace EventSystem
 	//Gets the callbacks for a given event
 	//	T	:	Callback signature of event
 	//	eventID	:	ID of the event callbacks (see defines)
-	//	obj	:	Game::ControlObject (used for overloading of function)
 	//	@return	:	Collection of callbacks
-	template<typename T> std::vector<std::function<T>> GetEventCallbacks(short eventID, Game::ControlObject* obj)
+	template<typename T> std::vector<std::function<T>> GetEventCallbacksCO(short eventID)
 	{
 		std::vector<std::function<T>> vec;
 		auto eventMap = controlObjectCallbacks.find(eventID)->second;

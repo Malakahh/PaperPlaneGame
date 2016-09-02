@@ -16,6 +16,8 @@ Game::Camera::~Camera()
 
 void Game::Camera::drawSprites()
 {
+	sf::Clock c;
+
 	//Build worldobjects to draw
 	for (auto it = Game::AllWorldObjects.cbegin(); it != Game::AllWorldObjects.cend(); ++it)
 	{
@@ -27,6 +29,8 @@ void Game::Camera::drawSprites()
 			this->worldObjectsToDraw[obj->layer][obj->position.z].push_back(obj);
 		}
 	}
+	
+	Log::Message("Built: " + std::to_string(c.getElapsedTime().asMilliseconds()));
 
 	//Draw objects in correct order
 	for (auto layerIt = this->worldObjectsToDraw.cbegin(); layerIt != this->worldObjectsToDraw.cend(); ++layerIt) //Layers
@@ -49,8 +53,10 @@ void Game::Camera::drawSprites()
 			}
 		}
 	}
-
+	Log::Message("Drawn: " + std::to_string(c.getElapsedTime().asMilliseconds()));
 	this->clearWorldObjectsToDraw();
+	Log::Message("Clear: " + std::to_string(c.getElapsedTime().asMilliseconds()));
+	Log::Error("-----");
 }
 
 void Game::Camera::scaleWorldObjectToUnit(Game::WorldObject & object)

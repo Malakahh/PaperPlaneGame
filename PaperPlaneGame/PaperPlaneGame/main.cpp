@@ -34,7 +34,6 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-				
 		}
 
 		sf::Time time = clock.getElapsedTime();
@@ -44,6 +43,7 @@ int main()
 		{
 			(*it)->Update(time.asMilliseconds() - lastFrameTime.asMilliseconds());
 		}
+		
 
 		//Call ControlObject update
 		for (auto it = Game::AllControlObjects.cbegin(); it != Game::AllControlObjects.cend(); ++it)

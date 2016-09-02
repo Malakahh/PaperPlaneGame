@@ -1,7 +1,6 @@
 #pragma once
 #include "WorldObject.h"
 #include "TextureManager.h"
-#include "EventSystem.h"
 #include <functional>
 
 namespace Game
